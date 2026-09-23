@@ -1,0 +1,8 @@
+{
+  "name": "Adjei Nortey Materials \u0026 Supply 2",
+  "description": "Premium quarry stones, riversand, graded filling sand and commercial aggregates supplier with transparent rates and fast site delivery.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

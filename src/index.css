@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', 'Figtree', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Chivo', 'Figtree', system-ui, sans-serif;
+  --color-main: #EB4D23;
+  --color-minor: #080e21;
+  --color-brand: #EB4D23;
+  --color-brand-dark: #D03B13;
+  --color-brand-light: #FFF2EE;
+  --color-brand-surface: #FFF7F5;
+  --color-dark: #080e21;
+  --color-darker: #040813;
+  --color-whatsapp: #25D366;
+}
+
+@layer utilities {
+  .hero-glow {
+    background: radial-gradient(circle at 75% 35%, rgba(235, 77, 35, 0.22) 0%, rgba(8, 14, 33, 0) 70%), linear-gradient(180deg, #080e21 0%, #040813 100%);
+  }
+}
+
+html, body {
+  scroll-behavior: smooth;
+  font-family: 'Inter', 'Figtree', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.font-display {
+  font-family: 'Chivo', 'Figtree', system-ui, sans-serif;
+}
+
+.font-sans {
+  font-family: 'Inter', 'Figtree', system-ui, sans-serif;
+}
