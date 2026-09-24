@@ -197,115 +197,38 @@ export const AboutPageScreen: React.FC<AboutPageScreenProps> = ({
                   </p>
                 </div>
 
-                {/* 2x2 Grid of Materials */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  {/* Card 1: Quarry Stones */}
-                  <div
-                    onClick={() => onSelectMaterial(quarryItem)}
-                    className="border border-gray-200/90 rounded-xl p-5 hover:border-[#EB4D23] transition-all bg-white hover:shadow-md group cursor-pointer"
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center group-hover:bg-[#FFF4ED] transition-colors">
-                        <Layers className="w-5 h-5 text-[#080e21] group-hover:text-[#EB4D23]" />
+                {/* Grid of Materials */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {PRICE_ITEMS.map((item) => (
+                    <div
+                      key={item.id}
+                      onClick={() => onSelectMaterial(item)}
+                      className="border border-gray-200/90 rounded-xl p-5 hover:border-[#EB4D23] transition-all bg-white hover:shadow-md group cursor-pointer flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="w-full h-36 rounded-lg overflow-hidden mb-3 bg-gray-100">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <h3 className="text-base font-bold text-[#080e21] group-hover:text-[#EB4D23] transition-colors">
+                          {item.name}
+                        </h3>
+                        <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                          {item.description}
+                        </p>
                       </div>
-                      <span className="text-[11px] font-mono uppercase bg-gray-100 px-2 py-0.5 rounded text-gray-600 border border-gray-200">
-                        AGGREGATE
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-[#080e21] group-hover:text-[#EB4D23] transition-colors">
-                      Quarry Stones
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-2">
-                      Sizes: 3/4", 1", 3/8", 5/8" for concrete works &amp; structural foundation.
-                    </p>
-                    <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                      <span>Standard: BS 882</span>
-                      <span className="font-mono text-[#EB4D23] font-bold">
-                        Tier: GH₵ 2,850 / TRIP
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card 2: Riversand */}
-                  <div
-                    onClick={() => onSelectMaterial(riversandItem)}
-                    className="border border-gray-200/90 rounded-xl p-5 hover:border-[#EB4D23] transition-all bg-white hover:shadow-md group cursor-pointer"
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center group-hover:bg-[#FFF4ED] transition-colors">
-                        <Waves className="w-5 h-5 text-[#080e21] group-hover:text-[#EB4D23]" />
+                      <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
+                        <span>Unit: Single Trip</span>
+                        <span className="font-mono text-[#EB4D23] font-bold">
+                          {item.priceDisplay}
+                        </span>
                       </div>
-                      <span className="text-[11px] font-mono uppercase bg-gray-100 px-2 py-0.5 rounded text-gray-600 border border-gray-200">
-                        NATURAL SAND
-                      </span>
                     </div>
-                    <h3 className="text-lg font-bold text-[#080e21] group-hover:text-[#EB4D23] transition-colors">
-                      Riversand
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-2">
-                      Natural washed riversand for high-strength casting, block making &amp; mortar.
-                    </p>
-                    <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                      <span>Purity: Clean Washed</span>
-                      <span className="font-mono text-[#EB4D23] font-bold">
-                        Tier: GH₵ 3,100 / TRIP
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card 3: Filling Sand */}
-                  <div
-                    onClick={() => onSelectMaterial(fillingItem)}
-                    className="border border-gray-200/90 rounded-xl p-5 hover:border-[#EB4D23] transition-all bg-white hover:shadow-md group cursor-pointer"
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center group-hover:bg-[#FFF4ED] transition-colors">
-                        <Mountain className="w-5 h-5 text-[#080e21] group-hover:text-[#EB4D23]" />
-                      </div>
-                      <span className="text-[11px] font-mono uppercase bg-gray-100 px-2 py-0.5 rounded text-gray-600 border border-gray-200">
-                        SUB-BASE
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-[#080e21] group-hover:text-[#EB4D23] transition-colors">
-                      Filling Sand
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-2">
-                      Foundation filling sand including Grade 1 and Laterite for robust site compaction.
-                    </p>
-                    <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                      <span>Compaction: 98% Proctor</span>
-                      <span className="font-mono text-[#EB4D23] font-bold">
-                        Tier: GH₵ 1,850 / TRIP
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Card 4: Sand Grades */}
-                  <div
-                    onClick={() => onSelectMaterial(sandItem)}
-                    className="border border-gray-200/90 rounded-xl p-5 hover:border-[#EB4D23] transition-all bg-white hover:shadow-md group cursor-pointer"
-                  >
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center group-hover:bg-[#FFF4ED] transition-colors">
-                        <Grid className="w-5 h-5 text-[#080e21] group-hover:text-[#EB4D23]" />
-                      </div>
-                      <span className="text-[11px] font-mono uppercase bg-gray-100 px-2 py-0.5 rounded text-gray-600 border border-gray-200">
-                        FINISHING
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-bold text-[#080e21] group-hover:text-[#EB4D23] transition-colors">
-                      Sand Grades
-                    </h3>
-                    <p className="text-xs sm:text-sm text-gray-600 mt-2">
-                      Smooth Sand, Medium Sand, and Rough Sand for exterior plastering &amp; fine masonry.
-                    </p>
-                    <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-500">
-                      <span>Grading: Triple-Sieved</span>
-                      <span className="font-mono text-[#EB4D23] font-bold">
-                        Tier: GH₵ 2,300 / TRIP
-                      </span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
                 {/* Bottom Action Buttons */}

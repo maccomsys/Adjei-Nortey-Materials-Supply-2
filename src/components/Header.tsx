@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Layers,
   ChevronDown,
   ArrowRight,
   Menu,
@@ -10,7 +9,7 @@ import {
   Mail,
   Clock,
 } from 'lucide-react';
-import { COMPANY_DETAILS } from '../data/materialsData';
+import { COMPANY_DETAILS, LOGO } from '../data/materialsData';
 
 interface HeaderProps {
   currentView: 'home' | 'about' | 'materials' | 'quarry-stones' | 'services' | 'prices' | 'contact' | 'terms' | 'privacy';
@@ -62,19 +61,15 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand Logo */}
         <button
           onClick={onNavigateHome}
-          className="flex items-center gap-2.5 text-left uppercase group cursor-pointer"
+          className="flex items-center text-left group cursor-pointer"
+          aria-label={COMPANY_DETAILS.name}
         >
-          <span className="w-10 h-10 rounded-lg bg-[#EB4D23] flex items-center justify-center text-white shadow-md shadow-[#EB4D23]/20 group-hover:scale-105 transition-transform">
-            <Layers className="w-5 h-5 stroke-[2.2]" />
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="text-[#080e21] font-black tracking-tight font-display text-lg sm:text-xl">
-              {COMPANY_DETAILS.shortName.toUpperCase()}
-            </span>
-            <span className="text-[10px] text-gray-500 tracking-widest font-mono font-semibold uppercase mt-0.5">
-              MATERIALS DISPATCH
-            </span>
-          </span>
+          <img
+            src={LOGO}
+            alt={COMPANY_DETAILS.name}
+            className="h-12 sm:h-14 w-auto object-contain transition-transform group-hover:scale-105"
+            referrerPolicy="no-referrer"
+          />
         </button>
 
         {/* Desktop Navigation Cluster */}
@@ -127,46 +122,66 @@ export const Header: React.FC<HeaderProps> = ({
               />
             </button>
             {materialsDropdownOpen && (
-              <div className="absolute left-0 mt-1 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2.5 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+              <div className="absolute left-0 mt-1 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 py-2.5 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                 <button
                   onClick={() => {
-                    onSelectMaterial('quarry-3-4');
+                    onSelectMaterial('boulders');
                     setMaterialsDropdownOpen(false);
                   }}
                   className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
                 >
-                  <span className="font-semibold block text-gray-900">Quarry Stones</span>
-                  <span className="text-[11px] text-gray-400">3/4", 1", 3/8", 5/8" Aggregates</span>
+                  <span className="font-semibold block text-gray-900">Boulders</span>
+                  <span className="text-[11px] text-gray-400">GH₵ 6,000 / Trip</span>
                 </button>
                 <button
                   onClick={() => {
-                    onSelectMaterial('riversand-clean');
+                    onSelectMaterial('filling-material');
+                    setMaterialsDropdownOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
+                >
+                  <span className="font-semibold block text-gray-900">Filling Material / Laterite</span>
+                  <span className="text-[11px] text-gray-400">Contact for Price</span>
+                </button>
+                <button
+                  onClick={() => {
+                    onSelectMaterial('quarry-dust');
+                    setMaterialsDropdownOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
+                >
+                  <span className="font-semibold block text-gray-900">Quarry Dust</span>
+                  <span className="text-[11px] text-gray-400">GH₵ 7,300 / Trip</span>
+                </button>
+                <button
+                  onClick={() => {
+                    onSelectMaterial('quarry-stones');
+                    setMaterialsDropdownOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
+                >
+                  <span className="font-semibold block text-gray-900">Quarry Stones / Chippings</span>
+                  <span className="text-[11px] text-gray-400">GH₵ 5,500 / Trip</span>
+                </button>
+                <button
+                  onClick={() => {
+                    onSelectMaterial('riversand');
                     setMaterialsDropdownOpen(false);
                   }}
                   className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
                 >
                   <span className="font-semibold block text-gray-900">Riversand</span>
-                  <span className="text-[11px] text-gray-400">Clean washed dredged sand</span>
+                  <span className="text-[11px] text-gray-400">Contact for Price</span>
                 </button>
                 <button
                   onClick={() => {
-                    onSelectMaterial('filling-grade-1');
+                    onSelectMaterial('stones');
                     setMaterialsDropdownOpen(false);
                   }}
                   className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
                 >
-                  <span className="font-semibold block text-gray-900">Graded Filling Sand</span>
-                  <span className="text-[11px] text-gray-400">Grade 1 &amp; Laterite foundation fill</span>
-                </button>
-                <button
-                  onClick={() => {
-                    onSelectMaterial('sand-smooth');
-                    setMaterialsDropdownOpen(false);
-                  }}
-                  className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
-                >
-                  <span className="font-semibold block text-gray-900">Smooth &amp; Rough Sand</span>
-                  <span className="text-[11px] text-gray-400">Plastering &amp; block laying sand</span>
+                  <span className="font-semibold block text-gray-900">Stones</span>
+                  <span className="text-[11px] text-gray-400">GH₵ 5,000 / Trip</span>
                 </button>
               </div>
             )}
@@ -206,7 +221,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
                 >
                   <span className="font-semibold block text-gray-900">Building Material Supply</span>
-                  <span className="text-[11px] text-gray-400">Quarry stones, riversand, filling</span>
+                  <span className="text-[11px] text-gray-400">Boulders, quarry stones, sand</span>
                 </button>
                 <button
                   onClick={() => {
@@ -216,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
                 >
                   <span className="font-semibold block text-gray-900">Bulk Tipper Fleet Logistics</span>
-                  <span className="text-[11px] text-gray-400">10m³ to 20m³ direct site haulage</span>
+                  <span className="text-[11px] text-gray-400">Heavy-duty tipper site haulage</span>
                 </button>
                 <button
                   onClick={() => {
@@ -226,7 +241,7 @@ export const Header: React.FC<HeaderProps> = ({
                   className="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-[#FFF2EE] hover:text-[#EB4D23] font-medium transition-colors cursor-pointer"
                 >
                   <span className="font-semibold block text-gray-900">Site Landfilling &amp; Earthmoving</span>
-                  <span className="text-[11px] text-gray-400">Excavation &amp; foundation leveling</span>
+                  <span className="text-[11px] text-gray-400">Backfill &amp; laterite compaction</span>
                 </button>
               </div>
             )}
@@ -395,7 +410,7 @@ export const Header: React.FC<HeaderProps> = ({
               className="w-full inline-flex justify-center items-center gap-2 bg-gray-100 text-gray-800 font-bold py-2.5 px-4 rounded-xl text-sm cursor-pointer"
             >
               <Calculator className="w-4 h-4 text-[#EB4D23]" />
-              <span>Concrete &amp; Trip Calculator</span>
+              <span>Trip Calculator</span>
             </button>
             <a
               className="w-full inline-flex justify-center items-center gap-2 bg-[#EB4D23] text-white font-bold py-3 px-4 rounded-full shadow-md text-sm"

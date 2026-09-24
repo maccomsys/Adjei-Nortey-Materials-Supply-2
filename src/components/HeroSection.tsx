@@ -22,9 +22,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [selectedMaterial, setSelectedMaterial] = useState('quarry-3-4');
+  const [selectedMaterial, setSelectedMaterial] = useState('quarry-stones');
   const [tripsCount, setTripsCount] = useState(2);
-  const [siteLocation, setSiteLocation] = useState('Accra / Tema Corridor');
+  const [siteLocation, setSiteLocation] = useState('Mallam Junction / Greater Accra');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const currentItem = PRICE_ITEMS.find((p) => p.id === selectedMaterial) || PRICE_ITEMS[0];

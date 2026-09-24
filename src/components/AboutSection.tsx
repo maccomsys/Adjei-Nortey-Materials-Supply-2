@@ -44,21 +44,21 @@ export const AboutSection: React.FC = () => {
                 <span className="w-6 h-6 rounded-full bg-[#FFF2EE] text-[#EB4D23] flex items-center justify-center flex-shrink-0 text-xs">
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </span>
-                <span className="font-bold text-sm text-gray-800">Quality Quarry Stones</span>
+                <span className="font-bold text-sm text-gray-800">Boulders &amp; Quarry Stones</span>
               </div>
 
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 rounded-full bg-[#FFF2EE] text-[#EB4D23] flex items-center justify-center flex-shrink-0 text-xs">
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </span>
-                <span className="font-bold text-sm text-gray-800">Premium Riversand</span>
+                <span className="font-bold text-sm text-gray-800">Clean Washed Riversand</span>
               </div>
 
               <div className="flex items-center gap-3">
                 <span className="w-6 h-6 rounded-full bg-[#FFF2EE] text-[#EB4D23] flex items-center justify-center flex-shrink-0 text-xs">
                   <Check className="w-3.5 h-3.5 stroke-[3]" />
                 </span>
-                <span className="font-bold text-sm text-gray-800">Graded Filling Sand</span>
+                <span className="font-bold text-sm text-gray-800">Quarry Dust &amp; Laterite</span>
               </div>
 
               <div className="flex items-center gap-3">

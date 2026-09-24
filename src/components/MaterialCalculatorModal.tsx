@@ -53,9 +53,9 @@ export const MaterialCalculatorModal: React.FC<MaterialCalculatorModalProps> = (
     summaryText = `For wall plastering/rendering on ${area.toFixed(0)}m² surface area.`;
   }
 
-  const estStoneCost = stoneTrips * 2850;
-  const estSandCost = sandTrips * 3100;
-  const estFillingCost = fillingTrips * 1850;
+  const estStoneCost = stoneTrips * 5500;
+  const estSandCost = sandTrips * 5000;
+  const estFillingCost = fillingTrips * 4500;
   const totalEstimatedCost = estStoneCost + estSandCost + estFillingCost;
 
   return (
@@ -178,8 +178,8 @@ export const MaterialCalculatorModal: React.FC<MaterialCalculatorModalProps> = (
               {stoneTrips > 0 && (
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-xs flex items-center justify-between">
                   <div>
-                    <span className="text-xs font-bold text-gray-900 block">3/4" Quarry Stones</span>
-                    <span className="text-[11px] text-gray-500 font-mono">GH₵ 2,850 / trip</span>
+                    <span className="text-xs font-bold text-gray-900 block">Quarry Stones / Chippings</span>
+                    <span className="text-[11px] text-gray-500 font-mono">GH₵ 5,500 / trip</span>
                   </div>
                   <div className="text-right">
                     <span className="text-lg font-black text-[#EB4D23] font-mono tabular-nums">
@@ -193,10 +193,10 @@ export const MaterialCalculatorModal: React.FC<MaterialCalculatorModalProps> = (
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-xs flex items-center justify-between">
                   <div>
                     <span className="text-xs font-bold text-gray-900 block">
-                      {projectType === 'plaster' ? 'Smooth Plastering Sand' : 'Washed Riversand'}
+                      Washed Riversand
                     </span>
                     <span className="text-[11px] text-gray-500 font-mono">
-                      {projectType === 'plaster' ? 'GH₵ 2,400' : 'GH₵ 3,100'} / trip
+                      Contact for Rate
                     </span>
                   </div>
                   <div className="text-right">
@@ -211,9 +211,9 @@ export const MaterialCalculatorModal: React.FC<MaterialCalculatorModalProps> = (
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-xs flex items-center justify-between sm:col-span-2">
                   <div>
                     <span className="text-xs font-bold text-gray-900 block">
-                      Grade 1 / Laterite Filling Sand
+                      Filling Material / Laterite
                     </span>
-                    <span className="text-[11px] text-gray-500 font-mono">GH₵ 1,850 / trip</span>
+                    <span className="text-[11px] text-gray-500 font-mono">Contact for Rate</span>
                   </div>
                   <div className="text-right">
                     <span className="text-lg font-black text-[#EB4D23] font-mono tabular-nums">

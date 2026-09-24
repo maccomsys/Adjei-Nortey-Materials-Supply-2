@@ -4,6 +4,7 @@ import {
   Mail,
   Clock,
   Globe,
+  MapPin,
   MessageSquare,
   Send,
   CheckCircle2,
@@ -276,6 +277,24 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
 
               {/* Stack of Contact Information Cards */}
               <div className="space-y-3.5">
+                {/* Physical Location Tile */}
+                <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3.5 hover:bg-slate-100 transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-orange-100 text-[#EB4D23] flex items-center justify-center shrink-0 mt-0.5">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-bold tracking-wider text-slate-500 uppercase font-mono">
+                      Office &amp; Depot Location
+                    </p>
+                    <p className="text-sm font-extrabold text-slate-900">
+                      {COMPANY_DETAILS.location}
+                    </p>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      Fast tipper dispatch across Greater Accra &amp; nationwide
+                    </p>
+                  </div>
+                </div>
+
                 {/* Direct Phone Tile */}
                 <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-3.5 hover:bg-slate-100 transition-colors">
                   <div className="w-10 h-10 rounded-full bg-orange-100 text-[#EB4D23] flex items-center justify-center shrink-0">

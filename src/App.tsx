@@ -30,10 +30,10 @@ import { QuoteRequest, PriceItem } from './types';
 import { PRICE_ITEMS } from './data/materialsData';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'about' | 'materials' | 'quarry-stones' | 'services' | 'prices' | 'contact' | 'terms' | 'privacy'>('terms');
+  const [currentView, setCurrentView] = useState<'home' | 'about' | 'materials' | 'quarry-stones' | 'services' | 'prices' | 'contact' | 'terms' | 'privacy'>('home');
   const [calculatorOpen, setCalculatorOpen] = useState(false);
   const [priceListOpen, setPriceListOpen] = useState(false);
-  const [detailModalCategory, setDetailModalCategory] = useState<'quarry' | 'riversand' | 'filling' | 'sand' | null>(null);
+  const [detailModalCategory, setDetailModalCategory] = useState<'boulders' | 'quarry-stones' | 'quarry-dust' | 'filling' | 'riversand' | 'stones' | null>(null);
   const [activeQuote, setActiveQuote] = useState<QuoteRequest | null>(null);
 
   // Synchronize hash with view
@@ -77,28 +77,26 @@ export default function App() {
   };
 
   const handleSelectMaterial = (materialId: string) => {
-    if (materialId.startsWith('quarry')) {
+    if (materialId === 'quarry-stones') {
       setCurrentView('quarry-stones');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     const item = PRICE_ITEMS.find((p) => p.id === materialId);
     if (item) {
-      if (item.category === 'quarry') setDetailModalCategory('quarry');
-      else if (item.category === 'riversand') setDetailModalCategory('riversand');
-      else if (item.category === 'filling') setDetailModalCategory('filling');
-      else setDetailModalCategory('sand');
+      setDetailModalCategory(item.category);
     }
   };
 
   const handleSelectCategoryFromFooter = (category: string) => {
-    if (category === 'quarry') {
+    if (category === 'quarry-stones') {
       setCurrentView('quarry-stones');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    if (category === 'quarry' || category === 'riversand' || category === 'filling' || category === 'sand') {
-      setDetailModalCategory(category as 'quarry' | 'riversand' | 'filling' | 'sand');
+    const validCategory = (['boulders', 'quarry-stones', 'quarry-dust', 'filling', 'riversand', 'stones'] as const).find((c) => c === category);
+    if (validCategory) {
+      setDetailModalCategory(validCategory);
     }
   };
 
@@ -125,7 +123,7 @@ export default function App() {
       materialId: 'quarry-3-4',
       quantity: trips,
       unit: 'trip',
-      location: 'Standard Delivery Zone (Accra/Tema)',
+      location: 'Mallam Junction & Greater Accra Delivery Zone',
       additionalNotes: materialSummary,
     });
   };
@@ -269,13 +267,7 @@ export default function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onSelectOtherMaterial={(cat) => {
-              if (cat === 'riversand') {
-                setDetailModalCategory('riversand');
-              } else if (cat === 'filling') {
-                setDetailModalCategory('filling');
-              } else {
-                setDetailModalCategory('sand');
-              }
+              setDetailModalCategory(cat);
             }}
             onQuoteSubmit={handleQuoteSubmit}
           />
@@ -377,9 +369,7 @@ export default function App() {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onSelectCategory={(cat) => {
-              if (cat === 'quarry') setDetailModalCategory('quarry');
-              else if (cat === 'filling') setDetailModalCategory('filling');
-              else setDetailModalCategory('sand');
+              setDetailModalCategory(cat);
             }}
             onSelectMaterial={handleSelectPriceItemForQuote}
           />
@@ -421,7 +411,7 @@ export default function App() {
 
             {/* 5. Our Supply Materials Section */}
             <MaterialsSection
-              onSelectCategory={(cat) => setDetailModalCategory(cat as any)}
+              onSelectCategory={(cat) => setDetailModalCategory(cat)}
               onOpenDetailModal={(cat) => setDetailModalCategory(cat)}
             />
 

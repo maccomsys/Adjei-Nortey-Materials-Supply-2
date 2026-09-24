@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, ChevronRight, Phone, Mail, ArrowUp, X, Shield, FileText } from 'lucide-react';
-import { COMPANY_DETAILS } from '../data/materialsData';
+import { ChevronRight, Phone, Mail, MapPin, ArrowUp, X, Shield, FileText } from 'lucide-react';
+import { COMPANY_DETAILS, LOGO } from '../data/materialsData';
 
 interface FooterProps {
   onSelectCategory: (category: string) => void;
@@ -26,13 +26,13 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-white/10">
           {/* Col 1: Brand Info */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#EB4D23] flex items-center justify-center text-white shadow-md">
-                <Box className="w-5 h-5 stroke-[2.2]" />
-              </div>
-              <span className="font-display font-black tracking-wider text-xl text-white">
-                {COMPANY_DETAILS.shortName.toUpperCase()}
-              </span>
+            <div className="flex items-center">
+              <img
+                src={LOGO}
+                alt={COMPANY_DETAILS.name}
+                className="h-12 sm:h-14 w-auto object-contain"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <p className="text-xs sm:text-sm text-gray-400 leading-relaxed max-w-sm">
               {COMPANY_DETAILS.name} is a leading supplier of quality building materials for
@@ -142,18 +142,9 @@ export const Footer: React.FC<FooterProps> = ({
                 <a
                   className="hover:text-[#EB4D23] transition flex items-center gap-1.5"
                   href="#pricing"
-                  onClick={() => onSelectCategory('quarry')}
+                  onClick={() => onSelectCategory('boulders')}
                 >
-                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Quarry Stones (3/4", 1", 3/8")
-                </a>
-              </li>
-              <li>
-                <a
-                  className="hover:text-[#EB4D23] transition flex items-center gap-1.5"
-                  href="#pricing"
-                  onClick={() => onSelectCategory('riversand')}
-                >
-                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Clean Washed Riversand
+                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Boulders (GH₵ 6,000)
                 </a>
               </li>
               <li>
@@ -162,25 +153,43 @@ export const Footer: React.FC<FooterProps> = ({
                   href="#pricing"
                   onClick={() => onSelectCategory('filling')}
                 >
-                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Graded Filling Sand &amp; Laterite
+                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Filling Material / Laterite
                 </a>
               </li>
               <li>
                 <a
                   className="hover:text-[#EB4D23] transition flex items-center gap-1.5"
                   href="#pricing"
-                  onClick={() => onSelectCategory('sand')}
+                  onClick={() => onSelectCategory('quarry-dust')}
                 >
-                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Smooth Plastering Sand
+                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Quarry Dust (GH₵ 7,300)
                 </a>
               </li>
               <li>
                 <a
                   className="hover:text-[#EB4D23] transition flex items-center gap-1.5"
                   href="#pricing"
-                  onClick={() => onSelectCategory('sand')}
+                  onClick={() => onSelectCategory('quarry-stones')}
                 >
-                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Rough Rendering Sand
+                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Quarry Stones / Chippings (GH₵ 5,500)
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-[#EB4D23] transition flex items-center gap-1.5"
+                  href="#pricing"
+                  onClick={() => onSelectCategory('riversand')}
+                >
+                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Riversand
+                </a>
+              </li>
+              <li>
+                <a
+                  className="hover:text-[#EB4D23] transition flex items-center gap-1.5"
+                  href="#pricing"
+                  onClick={() => onSelectCategory('stones')}
+                >
+                  <ChevronRight className="w-3 h-3 text-[#EB4D23]" /> Stones (GH₵ 5,000)
                 </a>
               </li>
             </ul>
@@ -192,6 +201,16 @@ export const Footer: React.FC<FooterProps> = ({
               Contact Info
             </h4>
             <div className="space-y-3 text-xs sm:text-sm text-gray-400">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[#EB4D23] mt-0.5 flex-shrink-0" />
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-gray-500 block">Location</span>
+                  <p className="text-white font-medium">
+                    {COMPANY_DETAILS.location}
+                  </p>
+                </div>
+              </div>
+
               <div className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-[#EB4D23] mt-0.5 flex-shrink-0" />
                 <div>

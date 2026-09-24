@@ -7,12 +7,14 @@ import {
   ArrowUpRight,
   Sparkles,
   Info,
+  CheckCircle2,
 } from 'lucide-react';
-import { COMPANY_DETAILS, IMAGES } from '../data/materialsData';
+import { COMPANY_DETAILS, MATERIAL_CATEGORIES, PRICE_ITEMS } from '../data/materialsData';
+import { PriceItem, MaterialCategoryId } from '../types';
 
 interface MaterialsSectionProps {
-  onSelectCategory: (categoryId: string) => void;
-  onOpenDetailModal: (type: 'quarry' | 'filling' | 'sand') => void;
+  onSelectCategory: (categoryId: MaterialCategoryId) => void;
+  onOpenDetailModal?: (type: MaterialCategoryId) => void;
 }
 
 export const MaterialsSection: React.FC<MaterialsSectionProps> = ({
@@ -30,123 +32,68 @@ export const MaterialsSection: React.FC<MaterialsSectionProps> = ({
               <span>Our Supply Materials</span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-gray-900 leading-tight">
-              We Build Your Dreams <br />
-              <span className="text-gray-900">With Trust &amp; Quality.</span>
+              We Supply Your Projects <br />
+              <span className="text-[#EB4D23]">With Trust &amp; Quality.</span>
             </h2>
           </div>
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <p className="text-xs sm:text-sm text-gray-500 max-w-xs leading-relaxed">
-              {COMPANY_DETAILS.name} supplies all grades of premium building materials suited for
-              residential, commercial, and industrial construction projects.
+              {COMPANY_DETAILS.name} supplies quality building materials suited for
+              residential, commercial, and infrastructure construction projects.
             </p>
             <a
               className="inline-flex items-center gap-2 bg-[#080e21] hover:bg-black text-white text-xs font-bold px-5 py-3 rounded-full transition shadow-sm"
               href="#pricing"
             >
-              <span>See More</span>
+              <span>View Prices</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
 
-        {/* 3 Material Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1: Quarry Stones */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200/80 flex flex-col justify-between group">
-            <div>
-              <h3 className="text-xl font-extrabold text-gray-900 mb-2 font-display">
-                Quarry Stones
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-6">
-                High quality crushed quarry stones supplied in multiple graded sizes including 3/4",
-                1", 3/8", and 5/8" for concrete works.
-              </p>
-              <div className="w-10 h-10 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center mb-6 text-sm group-hover:bg-[#FFF2EE] group-hover:text-[#EB4D23] transition-colors">
-                <Boxes className="w-5 h-5" />
+        {/* 6 Material Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {MATERIAL_CATEGORIES.map((cat) => (
+            <div
+              key={cat.id}
+              onClick={() => onSelectCategory(cat.id)}
+              className="bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200/80 flex flex-col justify-between group cursor-pointer"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-xl font-extrabold text-gray-900 font-display group-hover:text-[#EB4D23] transition-colors">
+                    {cat.name}
+                  </h3>
+                  <span className="text-xs font-mono font-bold text-[#EB4D23] bg-[#FFF2EE] px-2.5 py-1 rounded-full">
+                    {cat.priceDisplay}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-4 line-clamp-2">
+                  {cat.description}
+                </p>
+              </div>
+
+              <div className="relative rounded-2xl overflow-hidden h-52 bg-gray-100 mt-2">
+                <img
+                  alt={cat.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  src={cat.image}
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 text-white text-xs font-semibold">
+                  <span>Single Trip Load</span>
+                </div>
+                <button
+                  aria-label={`View ${cat.name} details`}
+                  className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-[#EB4D23] text-white flex items-center justify-center shadow-lg hover:bg-[#D03B13] transition-colors cursor-pointer group-hover:scale-110"
+                >
+                  <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                </button>
               </div>
             </div>
-
-            <div className="relative rounded-2xl overflow-hidden h-52 bg-gray-100">
-              <img
-                alt="Quarry Stones"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                src={IMAGES.quarryStones}
-                referrerPolicy="no-referrer"
-              />
-              <button
-                onClick={() => onOpenDetailModal('quarry')}
-                aria-label="View Quarry Stones details"
-                className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-[#EB4D23] text-white flex items-center justify-center shadow-lg hover:bg-[#D03B13] transition-colors cursor-pointer group-hover:scale-110"
-              >
-                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-              </button>
-            </div>
-          </div>
-
-          {/* Card 2: Filling Sand */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200/80 flex flex-col justify-between group">
-            <div>
-              <h3 className="text-xl font-extrabold text-gray-900 mb-2 font-display">
-                Filling Sand
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-6">
-                Reliable filling sand options including Grade 1 and Laterite for strong foundation
-                leveling and major site filling.
-              </p>
-              <div className="w-10 h-10 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center mb-6 text-sm group-hover:bg-[#FFF2EE] group-hover:text-[#EB4D23] transition-colors">
-                <Truck className="w-5 h-5" />
-              </div>
-            </div>
-
-            <div className="relative rounded-2xl overflow-hidden h-52 bg-gray-100">
-              <img
-                alt="Filling Sand & Laterite"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                src={IMAGES.fillingSand}
-                referrerPolicy="no-referrer"
-              />
-              <button
-                onClick={() => onOpenDetailModal('filling')}
-                aria-label="View Filling Sand details"
-                className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-[#EB4D23] text-white flex items-center justify-center shadow-lg hover:bg-[#D03B13] transition-colors cursor-pointer group-hover:scale-110"
-              >
-                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-              </button>
-            </div>
-          </div>
-
-          {/* Card 3: Smooth & Rough Sand */}
-          <div className="bg-white rounded-3xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-200/80 flex flex-col justify-between group">
-            <div>
-              <h3 className="text-xl font-extrabold text-gray-900 mb-2 font-display">
-                Smooth &amp; Rough Sand
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-6">
-                Graded sand options including Smooth Sand, Medium Sand, and Rough Sand perfect for
-                masonry and fine plastering.
-              </p>
-              <div className="w-10 h-10 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center mb-6 text-sm group-hover:bg-[#FFF2EE] group-hover:text-[#EB4D23] transition-colors">
-                <Shield className="w-5 h-5" />
-              </div>
-            </div>
-
-            <div className="relative rounded-2xl overflow-hidden h-52 bg-gray-100">
-              <img
-                alt="Washed riversand and masonry aggregate"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                src={IMAGES.riversand}
-                referrerPolicy="no-referrer"
-              />
-              <button
-                onClick={() => onOpenDetailModal('sand')}
-                aria-label="View Smooth & Rough Sand details"
-                className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-[#EB4D23] text-white flex items-center justify-center shadow-lg hover:bg-[#D03B13] transition-colors cursor-pointer group-hover:scale-110"
-              >
-                <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
