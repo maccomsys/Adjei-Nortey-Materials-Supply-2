@@ -94,7 +94,7 @@ export const MaterialsPageScreen: React.FC<MaterialsPageScreenProps> = ({
                 All material pricing is based on a Single Tipper Truck Trip Delivery
               </h2>
               <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
-                Choose from our 6 certified building materials below. Check full specs, multiple product angles, and instant dispatch booking.
+                Choose from our 6 certified building materials below. Check full specs, multiple product angles, and direct dispatch ordering.
               </p>
             </div>
             <button
@@ -255,7 +255,7 @@ export const MaterialsPageScreen: React.FC<MaterialsPageScreenProps> = ({
                       }}
                       className="inline-flex items-center gap-1.5 bg-[#EB4D23] hover:bg-[#d63f17] text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-sm cursor-pointer active:scale-95"
                     >
-                      <span>Book Trip</span>
+                      <span>Order Material</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>

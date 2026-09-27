@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, Phone, Mail, MapPin, ArrowUp, X, Shield, FileText } from 'lucide-react';
+import { ChevronRight, Phone, MapPin, ArrowUp, X, Shield, FileText, MessageSquare } from 'lucide-react';
 import { COMPANY_DETAILS, LOGO } from '../data/materialsData';
 
 interface FooterProps {
@@ -225,22 +225,7 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
 
               <div className="flex items-start gap-2.5">
-                <Mail className="w-4 h-4 text-[#EB4D23] mt-0.5 flex-shrink-0" />
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-500 block">Email Us</span>
-                  <a
-                    className="text-white hover:text-[#EB4D23] transition break-all"
-                    href={`mailto:${COMPANY_DETAILS.email}`}
-                  >
-                    {COMPANY_DETAILS.email}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <span className="w-4 h-4 rounded-full bg-[#25D366] text-white flex items-center justify-center font-bold text-[10px] mt-0.5 flex-shrink-0">
-                  W
-                </span>
+                <MessageSquare className="w-4 h-4 text-[#25D366] mt-0.5 flex-shrink-0" />
                 <div>
                   <span className="text-[10px] uppercase font-bold text-gray-500 block">WhatsApp</span>
                   <a

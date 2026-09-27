@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Phone,
-  Mail,
   Clock,
   ChevronRight,
   Truck,
@@ -44,25 +43,39 @@ export const QuarryStonesPageScreen: React.FC<QuarryStonesPageScreenProps> = ({
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const quarryItem = PRICE_ITEMS.find((item) => item.id === 'quarry-stones') || PRICE_ITEMS[3];
 
+  const generateWhatsAppLink = () => {
+    const text = encodeURIComponent(
+      `Hello ${COMPANY_DETAILS.name},\n` +
+      `I would like to order Quarry Stones / Chippings (GH₵ 5,500 / Single Trip).\n\n` +
+      `*Name:* ${fullName || 'Site Contractor'}\n` +
+      `*Phone:* ${phone || 'Available on call'}\n` +
+      `*Delivery Location & Trips:* ${message || 'Mallam Junction / Accra'}\n\n` +
+      `Please confirm single trip dispatch schedule.`
+    );
+    return `https://wa.me/233244520024?text=${text}`;
+  };
+
   const handleEnquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName || !phone) return;
+    if (!fullName) return;
+
+    const whatsappUrl = generateWhatsAppLink();
+    window.open(whatsappUrl, '_blank');
 
     if (onQuoteSubmit) {
       onQuoteSubmit({
         fullName,
-        email: email || COMPANY_DETAILS.email,
-        phone,
+        email: COMPANY_DETAILS.email,
+        phone: phone || COMPANY_DETAILS.phone,
         materialId: 'quarry-stones',
         quantity: 1,
         unit: 'trip',
-        location: 'Accra / Ghana Site',
+        location: message || 'Accra / Ghana Site',
         additionalNotes: `Selected Material: Quarry Stones / Chippings\nNotes: ${message}`,
       });
     }
@@ -72,21 +85,8 @@ export const QuarryStonesPageScreen: React.FC<QuarryStonesPageScreenProps> = ({
       setSubmitted(false);
       setFullName('');
       setPhone('');
-      setEmail('');
       setMessage('');
     }, 4000);
-  };
-
-  const generateWhatsAppLink = () => {
-    const text = encodeURIComponent(
-      `Hello ${COMPANY_DETAILS.name},\n` +
-      `I would like to order Quarry Stones / Chippings (GH₵ 5,500 / Single Trip).\n` +
-      `Name: ${fullName || 'Site Contractor'}\n` +
-      `Phone: ${phone || 'Available on call'}\n` +
-      `Location: Mallam Junction / Accra\n` +
-      `Notes: ${message || 'Please confirm single trip dispatch schedule.'}`
-    );
-    return `https://wa.me/233244520024?text=${text}`;
   };
 
   return (

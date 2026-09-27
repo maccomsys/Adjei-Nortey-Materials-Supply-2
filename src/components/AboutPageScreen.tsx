@@ -1,24 +1,15 @@
 import React from 'react';
 import {
   Phone,
-  Mail,
-  Clock,
-  Share2,
   Layers,
-  ChevronDown,
   CheckCircle2,
   Globe,
-  Award,
   Truck,
   Scale,
   Building,
   ShieldCheck,
-  ArrowRight,
   Headphones,
   MessageSquare,
-  Waves,
-  Mountain,
-  Grid,
 } from 'lucide-react';
 import { COMPANY_DETAILS, IMAGES, PRICE_ITEMS } from '../data/materialsData';
 import { PriceItem } from '../types';
@@ -42,11 +33,6 @@ export const AboutPageScreen: React.FC<AboutPageScreenProps> = ({
   onOpenCalculator,
   onSelectMaterial,
 }) => {
-  const quarryItem = PRICE_ITEMS.find((p) => p.id === 'quarry-3-4') || PRICE_ITEMS[0];
-  const riversandItem = PRICE_ITEMS.find((p) => p.id === 'riversand-clean') || PRICE_ITEMS[4];
-  const fillingItem = PRICE_ITEMS.find((p) => p.id === 'filling-grade-1') || PRICE_ITEMS[5];
-  const sandItem = PRICE_ITEMS.find((p) => p.id === 'sand-smooth') || PRICE_ITEMS[7];
-
   return (
     <div className="bg-[#F9FAFB] min-h-screen text-[#080e21] flex flex-col font-sans">
       {/* 3. HERO BANNER (Dark construction aesthetic with industrial scrim overlay) */}

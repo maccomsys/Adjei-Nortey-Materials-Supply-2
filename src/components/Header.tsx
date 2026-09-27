@@ -6,7 +6,7 @@ import {
   X,
   Calculator,
   Phone,
-  Mail,
+  MessageSquare,
   Clock,
 } from 'lucide-react';
 import { COMPANY_DETAILS, LOGO } from '../data/materialsData';
@@ -287,20 +287,22 @@ export const Header: React.FC<HeaderProps> = ({
               <Phone className="w-4 h-4" />
             </a>
             <a
-              aria-label="Mail Dispatch"
-              className="p-2 text-gray-600 hover:text-[#EB4D23] rounded-full hover:bg-gray-100 transition-colors"
-              href={`mailto:${COMPANY_DETAILS.email}`}
-              title="Email Dispatch"
+              aria-label="WhatsApp Dispatch"
+              className="p-2 text-gray-600 hover:text-[#25D366] rounded-full hover:bg-gray-100 transition-colors"
+              href="https://wa.me/233244520024"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Chat on WhatsApp"
             >
-              <Mail className="w-4 h-4" />
+              <MessageSquare className="w-4 h-4" />
             </a>
             <button
               onClick={onOpenCalculator}
-              aria-label="Schedule / Calculator"
+              aria-label="Trip Calculator"
               className="p-2 text-gray-600 hover:text-[#EB4D23] rounded-full hover:bg-gray-100 transition-colors cursor-pointer"
               title="Trip Calculator"
             >
-              <Clock className="w-4 h-4" />
+              <Calculator className="w-4 h-4" />
             </button>
           </div>
 
@@ -308,7 +310,8 @@ export const Header: React.FC<HeaderProps> = ({
             className="bg-[#EB4D23] hover:bg-[#D03B13] text-white font-bold text-xs sm:text-sm px-5 sm:px-6 py-2.5 rounded-full shadow-md shadow-[#EB4D23]/20 hover:shadow-lg active:scale-95 transition-all inline-flex items-center gap-2"
             href={`tel:${COMPANY_DETAILS.phone}`}
           >
-            <span>Book Now →</span>
+            <Phone className="w-4 h-4" />
+            <span>Call Now</span>
           </a>
 
           {/* Mobile Hamburger Button */}
@@ -416,7 +419,8 @@ export const Header: React.FC<HeaderProps> = ({
               className="w-full inline-flex justify-center items-center gap-2 bg-[#EB4D23] text-white font-bold py-3 px-4 rounded-full shadow-md text-sm"
               href={`tel:${COMPANY_DETAILS.phone}`}
             >
-              <span>Book Now →</span>
+              <Phone className="w-4 h-4" />
+              <span>Call: {COMPANY_DETAILS.phone}</span>
             </a>
           </div>
         </div>

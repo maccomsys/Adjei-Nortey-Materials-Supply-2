@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Shield, Phone, Mail, Globe } from 'lucide-react';
+import { ArrowLeft, Shield, Phone, Globe, MessageSquare } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/materialsData';
 
 interface PrivacyPageScreenProps {
@@ -98,15 +98,8 @@ export const PrivacyPageScreen: React.FC<PrivacyPageScreenProps> = ({
                 </p>
                 <p className="text-gray-600 flex items-center gap-2">
                   <Globe className="w-4 h-4 text-gray-400" />
-                  <span className="font-medium text-gray-700">Website:</span>
-                  <span className="text-gray-900 font-medium">adjeinorteymaterials.com</span>
-                </p>
-                <p className="text-gray-600 flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-gray-400" />
-                  <span className="font-medium text-gray-700">Email:</span>
-                  <a className="text-[#EB4D23] font-medium hover:underline" href={`mailto:${COMPANY_DETAILS.email}`}>
-                    {COMPANY_DETAILS.email}
-                  </a>
+                  <span className="font-medium text-gray-700">Depot Location:</span>
+                  <span className="text-gray-900 font-medium">{COMPANY_DETAILS.location}</span>
                 </p>
                 <p className="text-gray-600 flex items-center gap-2">
                   <Phone className="w-4 h-4 text-gray-400" />

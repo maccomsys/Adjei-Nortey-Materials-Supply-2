@@ -3,49 +3,60 @@ import {
   Phone,
   ArrowRight,
   User,
-  Mail,
+  MessageSquare,
   Lock,
-  Star,
   UserCheck,
   Truck,
-  CheckCircle2,
   Sparkles,
+  MapPin,
 } from 'lucide-react';
 import { COMPANY_DETAILS, IMAGES, PRICE_ITEMS } from '../data/materialsData';
 import { QuoteRequest } from '../types';
 
 interface HeroSectionProps {
-  onQuoteSubmit: (quote: QuoteRequest) => void;
+  onQuoteSubmit?: (quote: QuoteRequest) => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const [selectedMaterial, setSelectedMaterial] = useState('quarry-stones');
   const [tripsCount, setTripsCount] = useState(2);
-  const [siteLocation, setSiteLocation] = useState('Mallam Junction / Greater Accra');
+  const [siteLocation, setSiteLocation] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const currentItem = PRICE_ITEMS.find((p) => p.id === selectedMaterial) || PRICE_ITEMS[0];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !phone) return;
+    if (!name) return;
 
     setIsSubmitting(true);
+    const message =
+      `Hello ${COMPANY_DETAILS.name},\n` +
+      `I would like to enquire about building materials supply:\n\n` +
+      `*Customer Name:* ${name}\n` +
+      `*Material:* ${currentItem.name} (${currentItem.priceDisplay})\n` +
+      `*Quantity / Trips:* ${tripsCount} ${tripsCount === 1 ? 'Trip' : 'Trips'}\n` +
+      `*Site Location / Requirements:* ${siteLocation || 'Mallam Junction & Greater Accra'}\n\n` +
+      `Please confirm availability and dispatch schedule. Thank you!`;
+
+    const whatsappUrl = `https://wa.me/233244520024?text=${encodeURIComponent(message)}`;
+    
     setTimeout(() => {
       setIsSubmitting(false);
-      onQuoteSubmit({
-        fullName: name,
-        email: email || COMPANY_DETAILS.email,
-        phone: phone,
-        materialId: selectedMaterial,
-        quantity: tripsCount,
-        unit: 'trip',
-        location: siteLocation,
-      });
-    }, 400);
+      window.open(whatsappUrl, '_blank');
+      if (onQuoteSubmit) {
+        onQuoteSubmit({
+          fullName: name,
+          email: COMPANY_DETAILS.email,
+          phone: COMPANY_DETAILS.phone,
+          materialId: selectedMaterial,
+          quantity: tripsCount,
+          unit: 'trip',
+          location: siteLocation || 'Accra Site',
+        });
+      }
+    }, 200);
   };
 
   return (
@@ -67,7 +78,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
             {/* Small pill label */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EB4D23]/15 border border-[#EB4D23]/30 text-[#EB4D23] text-xs font-bold uppercase tracking-wider">
               <span className="w-2 h-2 rounded-full bg-[#EB4D23] animate-pulse"></span>
-              Best Construction Materials
+              Building Materials &amp; Supply
             </div>
 
             {/* Headline */}
@@ -79,18 +90,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
             {/* Intro copy */}
             <p className="text-gray-300 text-base sm:text-lg max-w-xl leading-relaxed">
               {COMPANY_DETAILS.name} is a dedicated supply partner delivering premium quarry stones,
-              riversand, and graded filling sand for commercial and residential builders across{' '}
+              riversand, boulders, and graded filling sand for commercial and residential builders across{' '}
               <span className="text-white font-medium">Accra, Tema, and nationwide</span>.
             </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
               <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-2 bg-[#EB4D23] hover:bg-[#D03B13] text-white font-bold px-7 py-3.5 rounded-full shadow-lg shadow-[#EB4D23]/30 transition-all hover:scale-[1.02]"
+                href={`https://wa.me/233244520024?text=${encodeURIComponent(
+                  `Hello ${COMPANY_DETAILS.name}, I would like to enquire about building materials supply for my site.`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-emerald-600 text-white font-bold px-7 py-3.5 rounded-full shadow-lg shadow-emerald-900/30 transition-all hover:scale-[1.02]"
               >
-                <span>Contact Now</span>
-                <ArrowRight className="w-4 h-4" />
+                <MessageSquare className="w-4 h-4 fill-white" />
+                <span>Enquire on WhatsApp</span>
               </a>
 
               <a
@@ -110,40 +125,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
                 </div>
               </a>
             </div>
-
-            {/* Avatar Proof Stats */}
-            <div className="pt-6 border-t border-white/10 flex items-center gap-4">
-              <div className="flex -space-x-3">
-                <div className="w-10 h-10 rounded-full border-2 border-[#080e21] bg-gradient-to-tr from-amber-600 to-amber-400 text-white flex items-center justify-center font-bold text-xs shadow-md">
-                  CK
-                </div>
-                <div className="w-10 h-10 rounded-full border-2 border-[#080e21] bg-gradient-to-tr from-blue-700 to-cyan-500 text-white flex items-center justify-center font-bold text-xs shadow-md">
-                  DA
-                </div>
-                <div className="w-10 h-10 rounded-full border-2 border-[#080e21] bg-gradient-to-tr from-emerald-700 to-teal-500 text-white flex items-center justify-center font-bold text-xs shadow-md">
-                  EN
-                </div>
-                <div className="w-10 h-10 rounded-full border-2 border-[#080e21] bg-[#EB4D23] text-white flex items-center justify-center font-bold text-xs shadow-md">
-                  +
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center gap-1 text-amber-400 text-xs mb-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-xs text-gray-300 font-semibold uppercase tracking-wider">
-                  <span className="text-white font-bold text-sm tabular-nums">
-                    {COMPANY_DETAILS.satisfiedPartners}
-                  </span>{' '}
-                  Satisfied Partners
-                </p>
-              </div>
-            </div>
           </div>
 
-          {/* Right Hero Column: Quote Card with floating badges */}
+          {/* Right Hero Column: Enquiry Card with floating badges */}
           <div className="lg:col-span-5 relative mt-8 lg:mt-0">
             {/* Floating Badge Top Left */}
             <div className="absolute -top-7 -left-3 sm:-top-8 sm:-left-6 z-20 bg-white/95 backdrop-blur-md text-gray-900 px-4 py-2.5 rounded-2xl shadow-xl border border-gray-100 flex items-center gap-3">
@@ -171,17 +155,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
               </div>
             </div>
 
-            {/* Request a Quote White Form Card */}
+            {/* WhatsApp Material Enquiry White Form Card */}
             <div
               className="bg-white rounded-3xl p-6 sm:p-8 text-gray-900 shadow-2xl relative z-10 border border-gray-100 pt-10 sm:pt-10"
               id="quote-form"
             >
               <div className="mb-5">
+                <div className="inline-flex items-center gap-1.5 text-[#25D366] text-xs font-extrabold uppercase tracking-wider mb-1">
+                  <MessageSquare className="w-3.5 h-3.5 fill-[#25D366]" />
+                  <span>WhatsApp Material Enquiry</span>
+                </div>
                 <h2 className="text-xl sm:text-2xl font-black font-display text-[#080e21] tracking-tight">
-                  Request A Quote
+                  Quick Supply Enquiry
                 </h2>
                 <p className="text-xs text-gray-500 mt-1">
-                  Get immediate pricing on delivery to your job site.
+                  Submit to chat directly on WhatsApp for rates &amp; dispatch ETA.
                 </p>
               </div>
 
@@ -199,45 +187,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#EB4D23] focus:bg-white transition"
-                      placeholder="e.g. John Doe"
+                      placeholder="e.g. Samuel Mensah"
                       type="text"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-1">
-                    Your Email
-                  </label>
-                  <div className="relative">
-                    <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                      <Mail className="w-4 h-4" />
-                    </span>
-                    <input
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#EB4D23] focus:bg-white transition"
-                      placeholder="e.g. adjeinortey999@gmail.com"
-                      type="email"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-1">
-                    Phone Number <span className="text-[#EB4D23]">*</span>
-                  </label>
-                  <div className="relative">
-                    <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
-                      <Phone className="w-4 h-4" />
-                    </span>
-                    <input
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#EB4D23] focus:bg-white transition"
-                      placeholder="0244520024"
-                      type="tel"
                     />
                   </div>
                 </div>
@@ -250,7 +201,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
                     <select
                       value={selectedMaterial}
                       onChange={(e) => setSelectedMaterial(e.target.value)}
-                      className="w-full py-2 px-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#EB4D23]"
+                      className="w-full py-2.5 px-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#EB4D23] cursor-pointer"
                     >
                       {PRICE_ITEMS.map((item) => (
                         <option key={item.id} value={item.id}>
@@ -268,7 +219,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
                       <button
                         type="button"
                         onClick={() => setTripsCount(Math.max(1, tripsCount - 1))}
-                        className="px-3 py-1.5 hover:bg-gray-200 text-sm font-bold text-gray-600 transition cursor-pointer"
+                        className="px-3 py-2 hover:bg-gray-200 text-sm font-bold text-gray-600 transition cursor-pointer"
                       >
                         -
                       </button>
@@ -278,11 +229,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
                       <button
                         type="button"
                         onClick={() => setTripsCount(tripsCount + 1)}
-                        className="px-3 py-1.5 hover:bg-gray-200 text-sm font-bold text-gray-600 transition cursor-pointer"
+                        className="px-3 py-2 hover:bg-gray-200 text-sm font-bold text-gray-600 transition cursor-pointer"
                       >
                         +
                       </button>
                     </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-1">
+                    Site Location &amp; Requirements
+                  </label>
+                  <div className="relative">
+                    <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                      <MapPin className="w-4 h-4" />
+                    </span>
+                    <input
+                      value={siteLocation}
+                      onChange={(e) => setSiteLocation(e.target.value)}
+                      className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#EB4D23] focus:bg-white transition"
+                      placeholder="e.g. Mallam Junction / East Legon site"
+                      type="text"
+                    />
                   </div>
                 </div>
 
@@ -300,27 +269,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
                 <div className="pt-1">
                   <button
                     disabled={isSubmitting}
-                    className="w-full bg-[#EB4D23] hover:bg-[#D03B13] active:scale-[0.99] text-white font-bold py-3.5 px-6 rounded-xl shadow-md shadow-[#EB4D23]/30 transition-all flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-75"
+                    className="w-full bg-[#25D366] hover:bg-emerald-600 active:scale-[0.99] text-white font-bold py-3.5 px-6 rounded-xl shadow-md shadow-emerald-900/20 transition-all flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-75"
                     type="submit"
                   >
                     {isSubmitting ? (
                       <span className="inline-flex items-center gap-2">
                         <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                        Processing Quote...
+                        Opening WhatsApp...
                       </span>
                     ) : (
                       <>
-                        <span>Submit Now</span>
+                        <MessageSquare className="w-4 h-4 fill-white" />
+                        <span>Send WhatsApp Message</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}
                   </button>
                 </div>
 
-                <p className="text-[11px] text-center text-gray-400 mt-1">
-                  <Lock className="w-3 h-3 inline mr-1 text-gray-400" />
-                  No spam. Instant quote dispatched within 15 mins.
-                </p>
+                <div className="pt-1 text-center">
+                  <a
+                    href={`tel:${COMPANY_DETAILS.phone}`}
+                    className="text-xs text-gray-500 hover:text-[#EB4D23] font-semibold inline-flex items-center gap-1.5 transition"
+                  >
+                    <Phone className="w-3 h-3 text-[#EB4D23]" />
+                    <span>Prefer to call? Phone {COMPANY_DETAILS.phone}</span>
+                  </a>
+                </div>
               </form>
             </div>
           </div>

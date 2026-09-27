@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, Clock } from 'lucide-react';
+import { Phone, Clock, MessageSquare } from 'lucide-react';
 import { COMPANY_DETAILS } from '../data/materialsData';
 
 export const TopBar: React.FC = () => {
@@ -13,14 +13,16 @@ export const TopBar: React.FC = () => {
             className="inline-flex items-center gap-1.5 hover:text-white/80 transition-colors font-semibold"
           >
             <Phone className="w-3.5 h-3.5" />
-            <span>{COMPANY_DETAILS.phone}</span>
+            <span>Call: {COMPANY_DETAILS.phone}</span>
           </a>
           <a
-            href={`mailto:${COMPANY_DETAILS.email}`}
-            className="inline-flex items-center gap-1.5 hover:text-white/80 transition-colors font-medium"
+            href="https://wa.me/233244520024"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 hover:text-white/80 transition-colors font-semibold"
           >
-            <Mail className="w-3.5 h-3.5" />
-            <span>{COMPANY_DETAILS.email}</span>
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>WhatsApp: {COMPANY_DETAILS.phone}</span>
           </a>
           <div className="hidden lg:inline-flex items-center gap-1.5 text-white/95">
             <Clock className="w-3.5 h-3.5" />

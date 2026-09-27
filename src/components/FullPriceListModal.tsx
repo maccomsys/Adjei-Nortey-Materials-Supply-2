@@ -92,7 +92,7 @@ export const FullPriceListModal: React.FC<FullPriceListModalProps> = ({
                       }}
                       className="px-3 py-1.5 rounded-lg bg-[#EB4D23] hover:bg-[#D03B13] text-white text-xs font-bold transition cursor-pointer"
                     >
-                      Book
+                      Select
                     </button>
                   </td>
                 </tr>

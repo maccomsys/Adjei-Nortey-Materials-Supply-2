@@ -27,7 +27,7 @@ import { FullPriceListModal } from './components/FullPriceListModal';
 import { MaterialDetailModal } from './components/MaterialDetailModal';
 import { QuoteSuccessModal } from './components/QuoteSuccessModal';
 import { QuoteRequest, PriceItem } from './types';
-import { PRICE_ITEMS } from './data/materialsData';
+import { PRICE_ITEMS, COMPANY_DETAILS } from './data/materialsData';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<'home' | 'about' | 'materials' | 'quarry-stones' | 'services' | 'prices' | 'contact' | 'terms' | 'privacy'>('home');
@@ -116,16 +116,14 @@ export default function App() {
   };
 
   const handleOrderWithCalc = (materialSummary: string, trips: number) => {
-    setActiveQuote({
-      fullName: 'Prospective Contractor / Builder',
-      email: 'client@site.com',
-      phone: '0244520024',
-      materialId: 'quarry-3-4',
-      quantity: trips,
-      unit: 'trip',
-      location: 'Mallam Junction & Greater Accra Delivery Zone',
-      additionalNotes: materialSummary,
-    });
+    const text = encodeURIComponent(
+      `Hello ${COMPANY_DETAILS.name},\n` +
+      `I calculated a material supply estimate on your website:\n\n` +
+      `*Estimate Details:* ${materialSummary}\n` +
+      `*Total Estimated Trips:* ${trips} Trips\n\n` +
+      `Please confirm current pricing and delivery schedule to my site.`
+    );
+    window.open(`https://wa.me/233244520024?text=${text}`, '_blank');
   };
 
   const navigateToHomeSection = (sectionId: string) => {

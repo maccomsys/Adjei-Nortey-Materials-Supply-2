@@ -36,7 +36,6 @@ export const PricesPageScreen: React.FC<PricesPageScreenProps> = ({
 }) => {
   const [activeUnit, setActiveUnit] = useState<SupplyUnit>('trip');
   const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
   const [materialNeeded, setMaterialNeeded] = useState('Quarry Stones / Chippings');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -64,22 +63,34 @@ export const PricesPageScreen: React.FC<PricesPageScreenProps> = ({
     e.preventDefault();
     if (!phone) return;
 
-    onQuoteSubmit({
-      fullName: 'Prospective Builder / Site Client',
-      email: email || COMPANY_DETAILS.email,
-      phone: phone,
-      materialId: 'quarry-stones',
-      quantity: 1,
-      unit: activeUnit,
-      location: 'Accra / Tema Corridor',
-      additionalNotes: `Material Needed: ${materialNeeded}\nDetails: ${message}`,
-    });
+    const whatsappMessage =
+      `Hello ${COMPANY_DETAILS.name},\n` +
+      `I would like to enquire about material pricing & dispatch:\n\n` +
+      `*Phone:* ${phone}\n` +
+      `*Material:* ${materialNeeded}\n` +
+      `*Location / Notes:* ${message || 'Mallam Junction / Accra area'}\n\n` +
+      `Please confirm pricing and delivery schedule.`;
+
+    const whatsappUrl = `https://wa.me/233244520024?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank');
+
+    if (onQuoteSubmit) {
+      onQuoteSubmit({
+        fullName: 'Prospective Builder / Site Client',
+        email: COMPANY_DETAILS.email,
+        phone: phone,
+        materialId: 'quarry-stones',
+        quantity: 1,
+        unit: activeUnit,
+        location: message || 'Accra / Tema Corridor',
+        additionalNotes: `Material Needed: ${materialNeeded}\nDetails: ${message}`,
+      });
+    }
 
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
       setPhone('');
-      setEmail('');
       setMessage('');
     }, 4000);
   };

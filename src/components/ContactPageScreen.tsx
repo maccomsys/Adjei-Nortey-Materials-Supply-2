@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import {
   Phone,
-  Mail,
   Clock,
   Globe,
   MapPin,
   MessageSquare,
-  Send,
   CheckCircle2,
-  AlertCircle,
   Info,
   ChevronDown,
   ArrowRight,
@@ -37,24 +34,39 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
 }) => {
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [materialNeeded, setMaterialNeeded] = useState('General Materials Supply Enquiry');
+  const [materialNeeded, setMaterialNeeded] = useState('Quarry Stones / Chippings');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  const generateWhatsAppLink = () => {
+    const text = encodeURIComponent(
+      `Hello ${COMPANY_DETAILS.name},\n` +
+      `I am sending an enquiry regarding building materials:\n\n` +
+      `*Name:* ${fullName || 'Site Client'}\n` +
+      `*Phone:* ${phone || 'Available on request'}\n` +
+      `*Material Needed:* ${materialNeeded}\n` +
+      `*Requirements / Site Location:* ${message || 'Mallam Junction / Greater Accra area'}\n\n` +
+      `Please provide current rates and delivery schedule.`
+    );
+    return `https://wa.me/233244520024?text=${text}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!fullName || !phone) return;
+    if (!fullName) return;
+
+    const whatsappUrl = generateWhatsAppLink();
+    window.open(whatsappUrl, '_blank');
 
     if (onQuoteSubmit) {
       onQuoteSubmit({
         fullName,
-        email: email || COMPANY_DETAILS.email,
-        phone,
+        email: COMPANY_DETAILS.email,
+        phone: phone || COMPANY_DETAILS.phone,
         materialId: 'general',
         quantity: 1,
         unit: 'trip',
-        location: 'Accra/Ghana Site',
+        location: message || 'Accra/Ghana Site',
         additionalNotes: `Material Needed: ${materialNeeded}\nDetails: ${message}`,
       });
     }
@@ -64,21 +76,9 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
       setSubmitted(false);
       setFullName('');
       setPhone('');
-      setEmail('');
       setMessage('');
-      setMaterialNeeded('General Materials Supply Enquiry');
+      setMaterialNeeded('Quarry Stones / Chippings');
     }, 4000);
-  };
-
-  const generateWhatsAppLink = () => {
-    const text = encodeURIComponent(
-      `Hello ${COMPANY_DETAILS.name},\n` +
-      `Name: ${fullName || 'Site Client'}\n` +
-      `Phone: ${phone || 'Available upon request'}\n` +
-      `Material: ${materialNeeded}\n` +
-      `Details: ${message || 'I would like to inquire about building material supply and delivery rates.'}`
-    );
-    return `https://wa.me/233244520024?text=${text}`;
   };
 
   return (
@@ -96,14 +96,14 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
           {/* Eyebrow / Tag */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold tracking-widest uppercase mb-4">
             <MessageSquare className="w-3.5 h-3.5 text-orange-400" />
-            <span>Get In Touch</span>
+            <span>Building Materials &amp; Supply</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4 text-white font-display">
             Contact Us
           </h1>
           <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-            Contact {COMPANY_DETAILS.name} for building material orders, quotes, and delivery confirmations.
+            Contact {COMPANY_DETAILS.name} directly via Call or WhatsApp for building material orders, rates, and delivery confirmations.
           </p>
         </div>
       </section>
@@ -111,13 +111,13 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
       {/* 2. Main Content Grid */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16" id="enquiry-form">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* LEFT COLUMN: Direct Supply Enquiry Form */}
+          {/* LEFT COLUMN: Direct Supply WhatsApp Enquiry Form */}
           <section
             className="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-slate-200"
             data-purpose="enquiry-card"
           >
             <span className="text-xs uppercase tracking-wider font-extrabold text-[#EB4D23] block mb-1">
-              Direct Supply Enquiry
+              WhatsApp Supply Enquiry
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-6 font-display">
               Send An Enquiry To {COMPANY_DETAILS.name}
@@ -128,10 +128,10 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                 <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-6 h-6 stroke-[2.5]" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900">Enquiry Dispatched Successfully!</h3>
+                <h3 className="text-lg font-bold text-slate-900">Enquiry Dispatched To WhatsApp!</h3>
                 <p className="text-sm text-slate-600 max-w-md mx-auto">
-                  Thank you, <strong>{fullName}</strong>. Our logistics and dispatch coordinator will call you at{' '}
-                  <strong className="text-slate-900">{phone}</strong> within 15 minutes to confirm site delivery details.
+                  Thank you, <strong>{fullName}</strong>. Your message was formatted and sent. You can also call us directly on{' '}
+                  <strong className="text-slate-900 font-mono">{COMPANY_DETAILS.phone}</strong>.
                 </p>
                 <div className="pt-2">
                   <a
@@ -141,7 +141,7 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                     className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl text-xs transition shadow-sm"
                   >
                     <MessageSquare className="w-4 h-4 fill-white" />
-                    <span>Follow Up Immediately on WhatsApp</span>
+                    <span>Open WhatsApp Chat Again</span>
                   </a>
                 </div>
               </div>
@@ -150,7 +150,7 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                 {/* Full Name */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="fullName">
-                    Full Name *
+                    Customer Name *
                   </label>
                   <input
                     id="fullName"
@@ -164,44 +164,26 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                   />
                 </div>
 
-                {/* Phone & Email Row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="phoneNumber">
-                      Phone Number *
-                    </label>
-                    <input
-                      id="phoneNumber"
-                      name="phoneNumber"
-                      type="tel"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="e.g. 055XXXXXXX"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-[#EB4D23] focus:ring-2 focus:ring-[#EB4D23]/20 transition-all text-sm outline-none"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="emailAddress">
-                      Email Address *
-                    </label>
-                    <input
-                      id="emailAddress"
-                      name="emailAddress"
-                      type="email"
-                      required
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="e.g. name@example.com"
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-[#EB4D23] focus:ring-2 focus:ring-[#EB4D23]/20 transition-all text-sm outline-none"
-                    />
-                  </div>
+                {/* Phone Number */}
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="phoneNumber">
+                    Phone Number
+                  </label>
+                  <input
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="e.g. 0244520024"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-[#EB4D23] focus:ring-2 focus:ring-[#EB4D23]/20 transition-all text-sm outline-none"
+                  />
                 </div>
 
                 {/* Material Needed */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="materialNeeded">
-                    Material Needed *
+                    Building Material / Product *
                   </label>
                   <div className="relative">
                     <select
@@ -209,14 +191,15 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                       name="materialNeeded"
                       value={materialNeeded}
                       onChange={(e) => setMaterialNeeded(e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:bg-white focus:border-[#EB4D23] focus:ring-2 focus:ring-[#EB4D23]/20 transition-all text-sm appearance-none outline-none cursor-pointer"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-800 focus:bg-white focus:border-[#EB4D23] focus:ring-2 focus:ring-[#EB4D23]/20 transition-all text-sm appearance-none outline-none cursor-pointer font-medium"
                     >
+                      <option value="Boulders (GH₵ 6,000 / Trip)">Boulders (GH₵ 6,000 / Trip)</option>
+                      <option value="Filling Material / Laterite (Contact for Price)">Filling Material / Laterite (Contact for Price)</option>
+                      <option value="Quarry Dust (GH₵ 7,300 / Trip)">Quarry Dust (GH₵ 7,300 / Trip)</option>
+                      <option value="Quarry Stones / Chippings (GH₵ 5,500 / Trip)">Quarry Stones / Chippings (GH₵ 5,500 / Trip)</option>
+                      <option value="Riversand (Contact for Price)">Riversand (Clean Dredged Sand)</option>
+                      <option value="Stones (GH₵ 5,000 / Trip)">Stones (GH₵ 5,000 / Trip)</option>
                       <option value="General Materials Supply Enquiry">General Materials Supply Enquiry</option>
-                      <option value="Quarry Stones">Quarry Stones (3/4", 1", 3/8", 5/8")</option>
-                      <option value="Riversand">Riversand (Clean Dredged Sand)</option>
-                      <option value="Filling Sand">Filling Sand (Grade 1 &amp; Laterite)</option>
-                      <option value="Smooth Sand">Smooth Sand (Fine Plastering Sand)</option>
-                      <option value="Rough Sand">Rough Sand (Coarse Rendering Sand)</option>
                     </select>
                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
                       <ChevronDown className="w-4 h-4" />
@@ -224,19 +207,19 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                   </div>
                 </div>
 
-                {/* Message / Details */}
+                {/* Message / Quantity & Location */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-1.5" htmlFor="messageDetails">
-                    Message / Details *
+                    Quantity, Requirements or Site Location *
                   </label>
                   <textarea
                     id="messageDetails"
                     name="messageDetails"
                     required
-                    rows={5}
+                    rows={4}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="State quantity, location or project specifications…"
+                    placeholder="e.g. Need 3 trips delivered to Mallam Junction construction site tomorrow morning."
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-slate-800 placeholder-slate-400 focus:bg-white focus:border-[#EB4D23] focus:ring-2 focus:ring-[#EB4D23]/20 transition-all text-sm outline-none resize-none"
                   />
                 </div>
@@ -245,19 +228,17 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3">
                   <button
                     type="submit"
-                    className="w-full bg-slate-900 hover:bg-black text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow hover:shadow-md transition-all text-sm cursor-pointer"
-                  >
-                    <span>Submit Enquiry</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <a
-                    href={generateWhatsAppLink()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full bg-[#EB4D23] hover:bg-[#d94119] text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-orange-500/20 hover:shadow-lg transition-all text-sm"
+                    className="w-full bg-[#25D366] hover:bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-emerald-900/20 transition-all text-sm cursor-pointer"
                   >
                     <MessageSquare className="w-4 h-4 fill-white" />
-                    <span>Send via WhatsApp</span>
+                    <span>Send Message on WhatsApp</span>
+                  </button>
+                  <a
+                    href={`tel:${COMPANY_DETAILS.phone}`}
+                    className="w-full bg-[#EB4D23] hover:bg-[#d94119] text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-orange-500/20 hover:shadow-lg transition-all text-sm"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>Call Us: {COMPANY_DETAILS.phone}</span>
                   </a>
                 </div>
               </form>
@@ -305,7 +286,7 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                       Official Phone
                     </p>
                     <a
-                      className="text-base font-extrabold text-slate-900 hover:text-[#EB4D23] transition-colors"
+                      className="text-base font-extrabold text-slate-900 hover:text-[#EB4D23] transition-colors font-mono"
                       href={`tel:${COMPANY_DETAILS.phone}`}
                     >
                       {COMPANY_DETAILS.phone}
@@ -323,7 +304,7 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                       WhatsApp Messaging
                     </p>
                     <a
-                      className="text-base font-extrabold text-emerald-700 hover:text-emerald-800 transition-colors"
+                      className="text-base font-extrabold text-emerald-700 hover:text-emerald-800 transition-colors font-mono"
                       href={`https://wa.me/233244520024?text=${encodeURIComponent(
                         `Hello ${COMPANY_DETAILS.name}, I am contacting you to order building materials for my site.`
                       )}`}
@@ -332,39 +313,6 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                     >
                       {COMPANY_DETAILS.phone}
                     </a>
-                  </div>
-                </div>
-
-                {/* Email Tile */}
-                <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-3.5 hover:bg-slate-100 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 text-[#EB4D23] flex items-center justify-center shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div className="overflow-hidden">
-                    <p className="text-[11px] font-bold tracking-wider text-slate-500 uppercase font-mono">
-                      Official Email
-                    </p>
-                    <a
-                      className="text-sm sm:text-base font-extrabold text-slate-900 hover:text-[#EB4D23] transition-colors truncate block"
-                      href={`mailto:${COMPANY_DETAILS.email}`}
-                    >
-                      {COMPANY_DETAILS.email}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Website Tile */}
-                <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-3.5 hover:bg-slate-100 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 text-[#EB4D23] flex items-center justify-center shrink-0">
-                    <Globe className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold tracking-wider text-slate-500 uppercase font-mono">
-                      Website
-                    </p>
-                    <span className="text-base font-extrabold text-slate-900">
-                      www.adjeinorteymaterials.com
-                    </span>
                   </div>
                 </div>
 
