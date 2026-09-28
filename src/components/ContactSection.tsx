@@ -82,10 +82,18 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
 
               <a
                 href={`tel:${COMPANY_DETAILS.phone}`}
-                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-5 py-3.5 rounded-full transition cursor-pointer"
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-black text-sm sm:text-base px-5 py-3.5 rounded-full transition cursor-pointer font-mono tracking-wide"
               >
-                <Phone className="w-3.5 h-3.5 text-[#EB4D23]" />
-                <span>Call: {COMPANY_DETAILS.phone}</span>
+                <Phone className="w-4 h-4 text-[#EB4D23]" />
+                <span>{COMPANY_DETAILS.phone}</span>
+              </a>
+
+              <a
+                href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-black text-sm sm:text-base px-5 py-3.5 rounded-full transition cursor-pointer font-mono tracking-wide"
+              >
+                <Phone className="w-4 h-4 text-[#EB4D23]" />
+                <span>{COMPANY_DETAILS.secondaryPhone}</span>
               </a>
             </div>
           </div>
@@ -116,16 +124,24 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs uppercase tracking-wider font-bold text-gray-400 block mb-0.5">
-                    Phone
+                  <span className="text-xs uppercase tracking-wider font-bold text-gray-400 block mb-1">
+                    Phone Numbers
                   </span>
-                  <a
-                    className="text-base font-extrabold text-gray-900 hover:text-[#EB4D23] transition block font-mono"
-                    href={`tel:${COMPANY_DETAILS.phone}`}
-                  >
-                    {COMPANY_DETAILS.phone}
-                  </a>
-                  <p className="text-xs text-gray-500 mt-0.5">Available 24/7 for urgent orders</p>
+                  <div className="flex flex-col gap-1">
+                    <a
+                      className="text-lg sm:text-xl font-black text-gray-900 hover:text-[#EB4D23] transition block font-mono tracking-tight"
+                      href={`tel:${COMPANY_DETAILS.phone}`}
+                    >
+                      {COMPANY_DETAILS.phone}
+                    </a>
+                    <a
+                      className="text-lg sm:text-xl font-black text-gray-900 hover:text-[#EB4D23] transition block font-mono tracking-tight"
+                      href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                    >
+                      {COMPANY_DETAILS.secondaryPhone}
+                    </a>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Available 24/7 for urgent orders</p>
                 </div>
               </div>
             </div>

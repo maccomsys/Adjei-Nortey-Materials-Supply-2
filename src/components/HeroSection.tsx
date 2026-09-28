@@ -108,22 +108,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
                 <span>Enquire on WhatsApp</span>
               </a>
 
-              <a
-                href={`tel:${COMPANY_DETAILS.phone}`}
-                className="inline-flex items-center justify-center sm:justify-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-6 py-3 rounded-full text-white transition"
-              >
-                <div className="w-9 h-9 rounded-full bg-[#EB4D23]/20 flex items-center justify-center text-[#EB4D23]">
+              <div className="inline-flex items-center justify-center sm:justify-start gap-3 bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-3 rounded-full text-white transition">
+                <div className="w-9 h-9 rounded-full bg-[#EB4D23]/20 flex items-center justify-center text-[#EB4D23] shrink-0">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div className="text-left">
                   <span className="block text-[11px] text-gray-400 uppercase tracking-wider font-semibold">
                     Call Now
                   </span>
-                  <span className="font-bold text-sm tracking-wide font-mono tabular-nums">
-                    {COMPANY_DETAILS.phone}
-                  </span>
+                  <div className="flex items-center gap-2 font-black text-sm sm:text-base md:text-lg tracking-wide font-mono tabular-nums">
+                    <a
+                      href={`tel:${COMPANY_DETAILS.phone}`}
+                      className="hover:text-[#EB4D23] transition underline-offset-2 hover:underline"
+                    >
+                      {COMPANY_DETAILS.phone}
+                    </a>
+                    <span className="text-gray-500 font-normal">/</span>
+                    <a
+                      href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                      className="hover:text-[#EB4D23] transition underline-offset-2 hover:underline"
+                    >
+                      {COMPANY_DETAILS.secondaryPhone}
+                    </a>
+                  </div>
                 </div>
-              </a>
+              </div>
             </div>
           </div>
 
@@ -287,13 +296,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onQuoteSubmit }) => {
                   </button>
                 </div>
 
-                <div className="pt-1 text-center">
+                <div className="pt-2 text-center text-xs sm:text-sm text-gray-600 flex items-center justify-center gap-2 flex-wrap border-t border-gray-100 mt-2">
+                  <Phone className="w-3.5 h-3.5 text-[#EB4D23]" />
+                  <span className="font-medium">Direct Call:</span>
                   <a
                     href={`tel:${COMPANY_DETAILS.phone}`}
-                    className="text-xs text-gray-500 hover:text-[#EB4D23] font-semibold inline-flex items-center gap-1.5 transition"
+                    className="font-black text-gray-900 hover:text-[#EB4D23] transition font-mono text-sm sm:text-base tracking-wide"
                   >
-                    <Phone className="w-3 h-3 text-[#EB4D23]" />
-                    <span>Prefer to call? Phone {COMPANY_DETAILS.phone}</span>
+                    {COMPANY_DETAILS.phone}
+                  </a>
+                  <span className="text-gray-400 font-bold">/</span>
+                  <a
+                    href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                    className="font-black text-gray-900 hover:text-[#EB4D23] transition font-mono text-sm sm:text-base tracking-wide"
+                  >
+                    {COMPANY_DETAILS.secondaryPhone}
                   </a>
                 </div>
               </form>

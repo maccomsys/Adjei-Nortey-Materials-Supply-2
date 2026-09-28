@@ -415,13 +415,22 @@ export const Header: React.FC<HeaderProps> = ({
               <Calculator className="w-4 h-4 text-[#EB4D23]" />
               <span>Trip Calculator</span>
             </button>
-            <a
-              className="w-full inline-flex justify-center items-center gap-2 bg-[#EB4D23] text-white font-bold py-3 px-4 rounded-full shadow-md text-sm"
-              href={`tel:${COMPANY_DETAILS.phone}`}
-            >
-              <Phone className="w-4 h-4" />
-              <span>Call: {COMPANY_DETAILS.phone}</span>
-            </a>
+            <div className="grid grid-cols-2 gap-2">
+              <a
+                className="inline-flex justify-center items-center gap-1.5 bg-[#EB4D23] text-white font-bold py-2.5 px-2 rounded-xl shadow-md text-xs font-mono"
+                href={`tel:${COMPANY_DETAILS.phone}`}
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>{COMPANY_DETAILS.phone}</span>
+              </a>
+              <a
+                className="inline-flex justify-center items-center gap-1.5 bg-slate-900 text-white font-bold py-2.5 px-2 rounded-xl shadow-md text-xs font-mono"
+                href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+              >
+                <Phone className="w-3.5 h-3.5 text-[#EB4D23]" />
+                <span>{COMPANY_DETAILS.secondaryPhone}</span>
+              </a>
+            </div>
           </div>
         </div>
       )}

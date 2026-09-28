@@ -284,14 +284,23 @@ export const AboutPageScreen: React.FC<AboutPageScreenProps> = ({
                 </p>
 
                 <div className="space-y-3">
-                  {/* Quick Call Button */}
-                  <a
-                    className="bg-[#EB4D23] hover:bg-[#D03B13] text-white font-bold text-sm w-full py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md transition-all active:scale-[0.98]"
-                    href={`tel:${COMPANY_DETAILS.phone}`}
-                  >
-                    <Phone className="w-4 h-4" />
-                    <span>Call: {COMPANY_DETAILS.phone}</span>
-                  </a>
+                  {/* Quick Call Buttons */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <a
+                      className="bg-[#EB4D23] hover:bg-[#D03B13] text-white font-bold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-[0.98] font-mono"
+                      href={`tel:${COMPANY_DETAILS.phone}`}
+                    >
+                      <Phone className="w-3.5 h-3.5" />
+                      <span>{COMPANY_DETAILS.phone}</span>
+                    </a>
+                    <a
+                      className="bg-white/15 hover:bg-white/25 text-white font-bold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md transition-all active:scale-[0.98] font-mono"
+                      href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                    >
+                      <Phone className="w-3.5 h-3.5 text-[#EB4D23]" />
+                      <span>{COMPANY_DETAILS.secondaryPhone}</span>
+                    </a>
+                  </div>
 
                   {/* WhatsApp Direct Connect Button */}
                   <a

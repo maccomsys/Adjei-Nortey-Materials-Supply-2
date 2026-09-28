@@ -212,24 +212,32 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
 
               <div className="flex items-start gap-2.5">
-                <Phone className="w-4 h-4 text-[#EB4D23] mt-0.5 flex-shrink-0" />
+                <Phone className="w-4 h-4 text-[#EB4D23] mt-1 flex-shrink-0" />
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-500 block">Call Us</span>
-                  <a
-                    className="text-white hover:text-[#EB4D23] transition font-semibold font-mono"
-                    href={`tel:${COMPANY_DETAILS.phone}`}
-                  >
-                    {COMPANY_DETAILS.phone}
-                  </a>
+                  <span className="text-[10px] uppercase font-bold text-gray-500 block mb-0.5">Call Us</span>
+                  <div className="flex flex-col gap-1">
+                    <a
+                      className="text-white hover:text-[#EB4D23] transition font-black font-mono text-sm sm:text-base tracking-wide"
+                      href={`tel:${COMPANY_DETAILS.phone}`}
+                    >
+                      {COMPANY_DETAILS.phone}
+                    </a>
+                    <a
+                      className="text-white hover:text-[#EB4D23] transition font-black font-mono text-sm sm:text-base tracking-wide"
+                      href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                    >
+                      {COMPANY_DETAILS.secondaryPhone}
+                    </a>
+                  </div>
                 </div>
               </div>
 
               <div className="flex items-start gap-2.5">
-                <MessageSquare className="w-4 h-4 text-[#25D366] mt-0.5 flex-shrink-0" />
+                <MessageSquare className="w-4 h-4 text-[#25D366] mt-1 flex-shrink-0" />
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-500 block">WhatsApp</span>
+                  <span className="text-[10px] uppercase font-bold text-gray-500 block mb-0.5">WhatsApp</span>
                   <a
-                    className="text-white hover:text-[#25D366] transition font-semibold font-mono"
+                    className="text-white hover:text-[#25D366] transition font-black font-mono text-sm sm:text-base tracking-wide"
                     href="https://wa.me/233244520024"
                     target="_blank"
                     rel="noopener noreferrer"

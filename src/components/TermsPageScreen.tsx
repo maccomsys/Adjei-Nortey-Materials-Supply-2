@@ -136,14 +136,21 @@ export const TermsPageScreen: React.FC<TermsPageScreenProps> = ({
                   <span className="font-medium text-gray-700">Depot Location:</span>
                   <span className="text-gray-900 font-medium">{COMPANY_DETAILS.location}</span>
                 </p>
-                <p className="text-gray-600 flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-gray-400" />
-                  <span className="font-medium text-gray-700">Phone / WhatsApp:</span>
+                <p className="text-gray-600 flex items-center gap-2 flex-wrap">
+                  <Phone className="w-4 h-4 text-gray-400 shrink-0" />
+                  <span className="font-medium text-gray-700">Phone Calls:</span>
                   <a
                     className="text-[#EB4D23] font-semibold hover:underline font-mono"
                     href={`tel:${COMPANY_DETAILS.phone}`}
                   >
                     {COMPANY_DETAILS.phone}
+                  </a>
+                  <span className="text-gray-400">/</span>
+                  <a
+                    className="text-[#EB4D23] font-semibold hover:underline font-mono"
+                    href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                  >
+                    {COMPANY_DETAILS.secondaryPhone}
                   </a>
                 </p>
               </div>

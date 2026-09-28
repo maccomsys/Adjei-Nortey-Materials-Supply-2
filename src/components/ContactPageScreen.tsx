@@ -277,34 +277,43 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
                 </div>
 
                 {/* Direct Phone Tile */}
-                <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-3.5 hover:bg-slate-100 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 text-[#EB4D23] flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5" />
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center gap-4 hover:bg-slate-100 transition-colors">
+                  <div className="w-12 h-12 rounded-full bg-orange-100 text-[#EB4D23] flex items-center justify-center shrink-0">
+                    <Phone className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold tracking-wider text-slate-500 uppercase font-mono">
-                      Official Phone
+                    <p className="text-xs font-bold tracking-wider text-slate-500 uppercase font-mono mb-0.5">
+                      Official Phone Numbers (Call Us)
                     </p>
-                    <a
-                      className="text-base font-extrabold text-slate-900 hover:text-[#EB4D23] transition-colors font-mono"
-                      href={`tel:${COMPANY_DETAILS.phone}`}
-                    >
-                      {COMPANY_DETAILS.phone}
-                    </a>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <a
+                        className="text-lg sm:text-xl font-black text-slate-900 hover:text-[#EB4D23] transition-colors font-mono tracking-tight"
+                        href={`tel:${COMPANY_DETAILS.phone}`}
+                      >
+                        {COMPANY_DETAILS.phone}
+                      </a>
+                      <span className="text-slate-400 font-bold">/</span>
+                      <a
+                        className="text-lg sm:text-xl font-black text-slate-900 hover:text-[#EB4D23] transition-colors font-mono tracking-tight"
+                        href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                      >
+                        {COMPANY_DETAILS.secondaryPhone}
+                      </a>
+                    </div>
                   </div>
                 </div>
 
                 {/* WhatsApp Tile (Highlighted Green) */}
-                <div className="p-3.5 rounded-xl border border-emerald-300 bg-emerald-50/70 flex items-center gap-3.5 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0">
-                    <MessageSquare className="w-5 h-5 fill-white" />
+                <div className="p-4 rounded-xl border border-emerald-300 bg-emerald-50/70 flex items-center gap-4 transition-colors">
+                  <div className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <MessageSquare className="w-6 h-6 fill-white" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold tracking-wider text-emerald-800 uppercase font-mono">
+                    <p className="text-xs font-bold tracking-wider text-emerald-800 uppercase font-mono mb-0.5">
                       WhatsApp Messaging
                     </p>
                     <a
-                      className="text-base font-extrabold text-emerald-700 hover:text-emerald-800 transition-colors font-mono"
+                      className="text-lg sm:text-xl font-black text-emerald-800 hover:text-emerald-900 transition-colors font-mono tracking-tight"
                       href={`https://wa.me/233244520024?text=${encodeURIComponent(
                         `Hello ${COMPANY_DETAILS.name}, I am contacting you to order building materials for my site.`
                       )}`}
@@ -337,13 +346,22 @@ export const ContactPageScreen: React.FC<ContactPageScreenProps> = ({
 
               {/* Quick Action Buttons */}
               <div className="mt-6 space-y-3">
-                <a
-                  className="w-full bg-[#EB4D23] hover:bg-[#d94119] text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-orange-500/20 hover:shadow-lg transition-all text-sm"
-                  href={`tel:${COMPANY_DETAILS.phone}`}
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>Call: {COMPANY_DETAILS.phone}</span>
-                </a>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <a
+                    className="w-full bg-[#EB4D23] hover:bg-[#d94119] text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-orange-500/20 hover:shadow-lg transition-all text-xs sm:text-sm font-mono"
+                    href={`tel:${COMPANY_DETAILS.phone}`}
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>Call {COMPANY_DETAILS.phone}</span>
+                  </a>
+                  <a
+                    className="w-full bg-slate-900 hover:bg-black text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all text-xs sm:text-sm font-mono"
+                    href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+                  >
+                    <Phone className="w-4 h-4 text-[#EB4D23]" />
+                    <span>Call {COMPANY_DETAILS.secondaryPhone}</span>
+                  </a>
+                </div>
                 <a
                   className="w-full bg-[#25D366] hover:bg-emerald-600 text-white font-bold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-green-600/20 hover:shadow-lg transition-all text-sm"
                   href={`https://wa.me/233244520024?text=${encodeURIComponent(

@@ -4,29 +4,39 @@ import { COMPANY_DETAILS } from '../data/materialsData';
 
 export const TopBar: React.FC = () => {
   return (
-    <div className="bg-[#EB4D23] text-white text-xs sm:text-sm py-2 px-4 sm:px-8 border-b border-[#D03B13]/30">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+    <div className="bg-[#EB4D23] text-white text-sm sm:text-base py-2.5 px-4 sm:px-8 border-b border-[#D03B13]/30 shadow-xs">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2.5">
         {/* Left: Contact Info */}
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-          <a
-            href={`tel:${COMPANY_DETAILS.phone}`}
-            className="inline-flex items-center gap-1.5 hover:text-white/80 transition-colors font-semibold"
-          >
-            <Phone className="w-3.5 h-3.5" />
-            <span>Call: {COMPANY_DETAILS.phone}</span>
-          </a>
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+          <div className="inline-flex items-center gap-2 bg-black/10 px-3 py-1 rounded-lg">
+            <Phone className="w-4 h-4 shrink-0 text-white" />
+            <span className="font-bold text-xs sm:text-sm uppercase tracking-wider text-white/90">Call:</span>
+            <a
+              href={`tel:${COMPANY_DETAILS.phone}`}
+              className="hover:text-yellow-200 transition-colors font-black text-sm sm:text-base tracking-wide font-mono"
+            >
+              {COMPANY_DETAILS.phone}
+            </a>
+            <span className="text-white/60 font-bold">/</span>
+            <a
+              href={`tel:${COMPANY_DETAILS.secondaryPhone}`}
+              className="hover:text-yellow-200 transition-colors font-black text-sm sm:text-base tracking-wide font-mono"
+            >
+              {COMPANY_DETAILS.secondaryPhone}
+            </a>
+          </div>
           <a
             href="https://wa.me/233244520024"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 hover:text-white/80 transition-colors font-semibold"
+            className="inline-flex items-center gap-2 bg-[#25D366]/20 hover:bg-[#25D366]/30 px-3 py-1 rounded-lg text-white hover:text-white transition-colors font-bold text-xs sm:text-sm"
           >
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>WhatsApp: {COMPANY_DETAILS.phone}</span>
+            <MessageSquare className="w-4 h-4 text-emerald-200 fill-emerald-200 shrink-0" />
+            <span>WhatsApp: <strong className="text-white font-mono font-black text-sm sm:text-base">{COMPANY_DETAILS.phone}</strong></span>
           </a>
-          <div className="hidden lg:inline-flex items-center gap-1.5 text-white/95">
-            <Clock className="w-3.5 h-3.5" />
-            <span>Monday - Saturday: 7:00 AM - 6:00 PM (24/7 Available)</span>
+          <div className="hidden xl:inline-flex items-center gap-1.5 text-white/90 text-xs sm:text-sm font-medium">
+            <Clock className="w-4 h-4 shrink-0" />
+            <span>Mon - Sat: 7:00 AM - 6:00 PM</span>
           </div>
         </div>
 
